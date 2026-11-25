@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+/*
+  @theme turns these variables into Tailwind classes automatically:
+  --color-gold → bg-gold, text-gold, border-gold ...
+  --font-display → font-display
+*/
+@theme {
+  --color-night: #0d0a14;      /* page background: concert hall at night */
+  --color-stage: #171225;      /* cards, panels */
+  --color-curtain: #241b38;    /* hover / raised surfaces */
+  --color-gold: #d4a94f;       /* accents */
+  --color-gold-soft: #e9cf8f;
+  --color-ivory: #efe7d6;      /* main text */
+  --color-mist: #a79fb8;       /* secondary text */
+
+  --font-display: "Playfair Display", "Noto Serif Devanagari", serif;
+  --font-body: "Nunito", "Noto Sans Devanagari", sans-serif;
+}
+
+body {
+  @apply bg-night text-ivory font-body antialiased;
+  /* a faint warm glow at the top, like stage lights */
+  background-image: radial-gradient(ellipse 80% 40% at 50% -10%, rgb(212 169 79 / 0.12), transparent);
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+/* ---------- Swara notation marks (used by <SwaraText />) ---------- */
+.swara {
+  position: relative;
+  display: inline-block;
+  padding: 0.15em 0.05em;
+}
+.swara.komal { text-decoration: underline; text-underline-offset: 4px; }
+.swara.tivra::before {               /* vertical stroke above tivra Ma */
+  content: "";
+  position: absolute; top: -0.1em; left: 50%;
+  width: 1.5px; height: 0.4em; background: currentColor;
+}
+.swara.mandra::after,
+.swara.taar::after {                 /* dot below (mandra) or above (taar) */
+  content: "";
+  position: absolute; left: 50%; transform: translateX(-50%);
+  width: 4px; height: 4px; border-radius: 9999px; background: currentColor;
+}
+.swara.mandra::after { bottom: -0.15em; }
+.swara.taar::after   { top: -0.1em; }
