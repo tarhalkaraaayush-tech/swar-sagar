@@ -2,7 +2,7 @@ import { useLanguage } from '../context/LanguageContext'
 import SwaraText from './SwaraText'
 
 export default function RagaCard({ raga, onOpen }) {
-  const { name, label } = useLanguage()
+  const { lang, name, label } = useLanguage()
 
   return (
     <button
@@ -13,8 +13,8 @@ export default function RagaCard({ raga, onOpen }) {
         <h3 className="font-display text-2xl text-gold-soft group-hover:text-gold">
           {name(raga.names)}
         </h3>
-        {/* show the English name too when browsing in mr/hi */}
-        <span className="text-sm text-mist">{raga.names.en}</span>
+        {/* show the English name too when browsing in mr/hi (not in English — it'd repeat) */}
+        {lang !== 'en' && <span className="text-sm text-mist">{raga.names.en}</span>}
       </div>
 
       <div className="flex flex-wrap gap-2 text-xs">

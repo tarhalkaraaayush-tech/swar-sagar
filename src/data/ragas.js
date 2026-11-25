@@ -5,13 +5,16 @@
 //   Suffix  '  → mandra saptak (lower octave)   e.g. N'
 //   Suffix  "  → taar saptak  (upper octave)    e.g. S"
 // Swaras are separated by spaces; a comma marks a short phrase break.
+//
+// jaati: one word when aaroh and avroh match ('audav', 'shadav', 'sampoorna'),
+//        "aaroh-avroh" when they differ ('audav-sampoorna').
 
 export const ragas = [
   {
     id: 'yaman',
     names: { mr: 'यमन', en: 'Yaman', hi: 'यमन' },
     thaat: 'kalyan',
-    jaati: 'sampoorna-sampoorna',
+    jaati: 'sampoorna',
     time: 'night',
     vadi: 'G',
     samvadi: 'N',
@@ -26,9 +29,9 @@ export const ragas = [
   },
   {
     id: 'bhoopali',
-    names: { mr: 'भूपाळी', en: 'Bhoopali', hi: 'भूपाली' },
+    names: { mr: 'भूपाली', en: 'Bhoopali', hi: 'भूपाली' },
     thaat: 'kalyan',
-    jaati: 'audav-audav',
+    jaati: 'audav',
     time: 'night',
     vadi: 'G',
     samvadi: 'D',
@@ -45,7 +48,7 @@ export const ragas = [
     id: 'kafi',
     names: { mr: 'काफी', en: 'Kafi', hi: 'काफ़ी' },
     thaat: 'kafi',
-    jaati: 'sampoorna-sampoorna',
+    jaati: 'sampoorna',
     time: 'late-night',
     vadi: 'P',
     samvadi: 'S',

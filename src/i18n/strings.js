@@ -40,6 +40,11 @@ export const strings = {
   vadi:          { mr: 'वादी', en: 'Vadi', hi: 'वादी' },
   samvadi:       { mr: 'संवादी', en: 'Samvadi', hi: 'संवादी' },
   close:         { mr: 'बंद करा', en: 'Close', hi: 'बंद करें' },
+
+  // settings
+  notation:      { mr: 'स्वरलिपी', en: 'Notation', hi: 'स्वरलिपि' },
+  bhatkhande:    { mr: 'भातखंडे', en: 'Bhatkhande', hi: 'भातखंडे' },
+  paluskar:      { mr: 'पलुस्कर', en: 'Paluskar', hi: 'पलुस्कर' },
 }
 
 // Labels for the values stored in the data files (thaat, jaati, time).

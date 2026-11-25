@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import { useLanguage } from '../context/LanguageContext'
+import { useSettings } from '../context/SettingsContext'
 import { LANGUAGES } from '../i18n/strings'
 
 // The paths here must match the <Route path="..."> entries in App.jsx.
@@ -14,6 +15,7 @@ const LINKS = [
 
 export default function Navbar() {
   const { t, lang, setLang } = useLanguage()
+  const { notation, setNotation } = useSettings()
   const [menuOpen, setMenuOpen] = useState(false) // mobile menu
 
   // NavLink passes { isActive } so we can highlight the current page.
@@ -40,6 +42,27 @@ export default function Navbar() {
         </div>
 
         <div className="flex items-center gap-2">
+          {/* Notation system: a two-button toggle. aria-pressed tells screen readers which is on. */}
+          <div
+            role="group"
+            aria-label={t('notation')}
+            title={t('notation')}
+            className="flex overflow-hidden rounded-md border border-gold/30 text-sm"
+          >
+            {['bhatkhande', 'paluskar'].map((sys) => (
+              <button
+                key={sys}
+                onClick={() => setNotation(sys)}
+                aria-pressed={notation === sys}
+                className={`px-2 py-1 transition-colors ${
+                  notation === sys ? 'bg-gold text-night' : 'bg-stage text-mist hover:text-ivory'
+                }`}
+              >
+                {t(sys)}
+              </button>
+            ))}
+          </div>
+
           <select
             value={lang}
             onChange={(e) => setLang(e.target.value)}

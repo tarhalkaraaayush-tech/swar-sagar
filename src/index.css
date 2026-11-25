@@ -26,23 +26,53 @@ body {
   min-height: 100vh;
 }
 
-/* ---------- Swara notation marks (used by <SwaraText />) ---------- */
+/* ---------- Swara notation marks (used by <SwaraText />) ----------
+   Each swara gets "swara", a system class (bk | pal) and its marks
+   (komal / tivra / mandra / taar). ::before draws marks ABOVE the
+   letter, ::after draws marks BELOW, so two marks never collide. */
 .swara {
   position: relative;
   display: inline-block;
-  padding: 0.15em 0.05em;
+  padding: 0.3em 0.05em;
 }
-.swara.komal { text-decoration: underline; text-underline-offset: 4px; }
-.swara.tivra::before {               /* vertical stroke above tivra Ma */
-  content: "";
-  position: absolute; top: -0.1em; left: 50%;
-  width: 1.5px; height: 0.4em; background: currentColor;
+.swara::before,
+.swara::after {
+  position: absolute; left: 50%;
+  background: currentColor;
 }
-.swara.mandra::after,
-.swara.taar::after {                 /* dot below (mandra) or above (taar) */
-  content: "";
-  position: absolute; left: 50%; transform: translateX(-50%);
-  width: 4px; height: 4px; border-radius: 9999px; background: currentColor;
+
+/* Bhatkhande ------------------------------------------------------ */
+.bk.komal::after  {                 /* horizontal line below */
+  content: ""; bottom: 0.1em; transform: translateX(-50%);
+  width: 0.9em; height: 1.5px;
 }
-.swara.mandra::after { bottom: -0.15em; }
-.swara.taar::after   { top: -0.1em; }
+.bk.tivra::before {                 /* vertical line above */
+  content: ""; top: 0; transform: translateX(-50%);
+  width: 1.5px; height: 0.4em;
+}
+.bk.taar::before {                  /* dot above */
+  content: ""; top: 0; transform: translateX(-50%);
+  width: 4px; height: 4px; border-radius: 9999px;
+}
+.bk.mandra::after {                 /* dot below */
+  content: ""; bottom: 0; transform: translateX(-50%);
+  width: 4px; height: 4px; border-radius: 9999px;
+}
+
+/* Paluskar -------------------------------------------------------- */
+.pal.komal::after {                 /* halant (्) below: short stroke slanting down-left */
+  content: ""; bottom: 0; transform: translateX(-50%) rotate(35deg);
+  width: 1.5px; height: 0.45em;
+}
+.pal.tivra::after {                 /* inverted halant below: slants the other way */
+  content: ""; bottom: 0; transform: translateX(-50%) rotate(-35deg);
+  width: 1.5px; height: 0.45em;
+}
+.pal.mandra::before {               /* dot above */
+  content: ""; top: 0; transform: translateX(-50%);
+  width: 4px; height: 4px; border-radius: 9999px;
+}
+.pal.taar::before {                 /* vertical line above */
+  content: ""; top: -0.05em; transform: translateX(-50%);
+  width: 1.5px; height: 0.45em;
+}
