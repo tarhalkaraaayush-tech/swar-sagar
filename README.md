@@ -25,7 +25,7 @@ Ragas and taals work without this. Accounts, compositions and the classroom need
 1. Create a project at [supabase.com](https://supabase.com).
 2. **SQL Editor → New query**, paste all of `supabase/schema.sql`, click **Run**.
    This creates the tables, the security rules and the private `submissions` bucket for recordings.
-3. **Project Settings → API**: copy the **Project URL** and the **anon / publishable** key.
+3. **Project Settings → API**: copy the **Project URL** and the **publishable** (or older **anon**) key — **Connect → App Frameworks → React** shows both.
 4. In this folder, copy `.env.example` to `.env.local` and paste those two values in.
    (Never use the `service_role` / secret key in this app.)
 5. Restart `npm run dev`.
