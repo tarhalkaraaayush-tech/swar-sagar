@@ -41,6 +41,25 @@ export const strings = {
   samvadi:       { mr: 'संवादी', en: 'Samvadi', hi: 'संवादी' },
   close:         { mr: 'बंद करा', en: 'Close', hi: 'बंद करें' },
 
+  // taals
+  matras:        { mr: 'मात्रा', en: 'matras', hi: 'मात्राएँ' },
+  vibhags:       { mr: 'विभाग', en: 'vibhags', hi: 'विभाग' },
+  theka:         { mr: 'ठेका', en: 'Theka', hi: 'ठेका' },
+  play:          { mr: 'वाजवा', en: 'Play', hi: 'बजाएँ' },
+  stop:          { mr: 'थांबवा', en: 'Stop', hi: 'रोकें' },
+  tempo:         { mr: 'लय', en: 'Tempo', hi: 'लय' },
+  bpm:           { mr: 'मात्रा/मिनिट', en: 'beats/min', hi: 'मात्रा/मिनट' },
+  allTaals:      { mr: '← सर्व ताल', en: '← All taals', hi: '← सभी ताल' },
+  sam:           { mr: 'सम', en: 'Sam', hi: 'सम' },
+  tali:          { mr: 'टाळी', en: 'Tali', hi: 'ताली' },
+  khali:         { mr: 'खाली', en: 'Khali', hi: 'ख़ाली' },
+  usedIn:        { mr: 'वापर', en: 'Used in', hi: 'प्रयोग' },
+  metronomeHint: {
+    mr: 'सम: उंच आवाज · टाळी: मध्यम · खाली: खालचा आवाज',
+    en: 'Sam: high click · Tali: medium · Khali: low click',
+    hi: 'सम: ऊँची आवाज़ · ताली: मध्यम · ख़ाली: नीची आवाज़',
+  },
+
   // settings
   notation:      { mr: 'स्वरलिपी', en: 'Notation', hi: 'स्वरलिपि' },
   bhatkhande:    { mr: 'भातखंडे', en: 'Bhatkhande', hi: 'भातखंडे' },
@@ -66,6 +85,13 @@ export const valueLabels = {
     audav:     { mr: 'औडव', en: 'Audav', hi: 'औडव' },
     shadav:    { mr: 'षाडव', en: 'Shadav', hi: 'षाडव' },
     sampoorna: { mr: 'संपूर्ण', en: 'Sampoorna', hi: 'संपूर्ण' },
+  },
+  usedFor: {
+    khayal:       { mr: 'ख्याल', en: 'Khayal', hi: 'ख़याल' },
+    dhrupad:      { mr: 'ध्रुपद-धमार', en: 'Dhrupad-Dhamar', hi: 'ध्रुपद-धमार' },
+    thumri:       { mr: 'ठुमरी', en: 'Thumri', hi: 'ठुमरी' },
+    light:        { mr: 'उपशास्त्रीय / भजन', en: 'Light classical / bhajan', hi: 'उपशास्त्रीय / भजन' },
+    instrumental: { mr: 'वाद्यसंगीत', en: 'Instrumental', hi: 'वाद्य संगीत' },
   },
   time: {
     'morning':   { mr: 'सकाळ', en: 'Morning', hi: 'सुबह' },
