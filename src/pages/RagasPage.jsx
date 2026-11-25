@@ -13,14 +13,17 @@ const unique = (field) => [...new Set(ragas.map((r) => r[field]))].sort()
 const OPTIONS = { thaat: unique('thaat'), jaati: unique('jaati'), time: unique('time') }
 
 export default function RagasPage() {
-  const { t } = useLanguage()
+  const { t, lang, name } = useLanguage()
   const [filters, setFilters] = useState(EMPTY_FILTERS)
   const [openRaga, setOpenRaga] = useState(null) // null = modal closed
 
-  // useMemo re-runs the filter only when `filters` changes, not on every render.
+  // useMemo re-runs this only when `filters` or the language changes, not on every render.
   const visible = useMemo(() => {
     const q = filters.query.trim().toLowerCase()
-    return ragas.filter((r) => {
+    // localeCompare sorts in the language's own alphabet order
+    // (Devanagari: अ आ इ … क ख ग …), not by raw character codes.
+    const sorted = [...ragas].sort((a, b) => name(a.names).localeCompare(name(b.names), lang))
+    return sorted.filter((r) => {
       // search matches any of the three names
       const matchesQuery = !q || Object.values(r.names).some((n) => n.toLowerCase().includes(q))
       return (
@@ -30,7 +33,8 @@ export default function RagasPage() {
         (!filters.time || r.time === filters.time)
       )
     })
-  }, [filters])
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- `name` is rebuilt every render but only depends on `lang`
+  }, [filters, lang])
 
   return (
     <section className="mx-auto max-w-6xl px-4 py-10">
