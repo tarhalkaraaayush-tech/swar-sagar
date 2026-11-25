@@ -45,20 +45,11 @@ export const strings = {
   matras:        { mr: 'मात्रा', en: 'matras', hi: 'मात्राएँ' },
   vibhags:       { mr: 'विभाग', en: 'vibhags', hi: 'विभाग' },
   theka:         { mr: 'ठेका', en: 'Theka', hi: 'ठेका' },
-  play:          { mr: 'वाजवा', en: 'Play', hi: 'बजाएँ' },
-  stop:          { mr: 'थांबवा', en: 'Stop', hi: 'रोकें' },
-  tempo:         { mr: 'लय', en: 'Tempo', hi: 'लय' },
-  bpm:           { mr: 'मात्रा/मिनिट', en: 'beats/min', hi: 'मात्रा/मिनट' },
   allTaals:      { mr: '← सर्व ताल', en: '← All taals', hi: '← सभी ताल' },
   sam:           { mr: 'सम', en: 'Sam', hi: 'सम' },
   tali:          { mr: 'टाळी', en: 'Tali', hi: 'ताली' },
   khali:         { mr: 'खाली', en: 'Khali', hi: 'ख़ाली' },
   usedIn:        { mr: 'वापर', en: 'Used in', hi: 'प्रयोग' },
-  metronomeHint: {
-    mr: 'सम: उंच आवाज · टाळी: मध्यम · खाली: खालचा आवाज',
-    en: 'Sam: high click · Tali: medium · Khali: low click',
-    hi: 'सम: ऊँची आवाज़ · ताली: मध्यम · ख़ाली: नीची आवाज़',
-  },
 
   // settings
   notation:      { mr: 'स्वरलिपी', en: 'Notation', hi: 'स्वरलिपि' },

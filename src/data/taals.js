@@ -192,10 +192,3 @@ export const taals = [
 // Helpers --------------------------------------------------------------
 
 export const matraCount = (taal) => taal.vibhags.reduce((sum, v) => sum + v.bols.length, 0)
-
-// Flatten into one entry per matra: { bol, mark (only on the vibhag's first matra), vibhagIndex }
-export function flattenTaal(taal) {
-  return taal.vibhags.flatMap((v, vi) =>
-    v.bols.map((bol, i) => ({ bol, mark: i === 0 ? v.mark : null, vibhagIndex: vi })),
-  )
-}
