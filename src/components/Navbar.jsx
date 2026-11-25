@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import { useLanguage } from '../context/LanguageContext'
 import { useSettings } from '../context/SettingsContext'
+import { useAuth } from '../context/AuthContext'
+import { isSupabaseConfigured } from '../lib/supabase'
 import { LANGUAGES } from '../i18n/strings'
 
 // The paths here must match the <Route path="..."> entries in App.jsx.
@@ -16,6 +18,7 @@ const LINKS = [
 export default function Navbar() {
   const { t, lang, setLang } = useLanguage()
   const { notation, setNotation } = useSettings()
+  const { user, profile } = useAuth()
   const [menuOpen, setMenuOpen] = useState(false) // mobile menu
 
   // NavLink passes { isActive } so we can highlight the current page.
@@ -73,6 +76,16 @@ export default function Navbar() {
               <option key={l.code} value={l.code}>{l.label}</option>
             ))}
           </select>
+
+          {/* Signed in → your name (links to Account). Signed out → "Sign in". */}
+          {isSupabaseConfigured && (
+            <NavLink
+              to={user ? '/account' : '/login'}
+              className="max-w-32 truncate rounded-full border border-gold/40 px-3 py-1 text-sm text-gold hover:bg-gold/10"
+            >
+              {user ? profile?.display_name || t('account') : t('signIn')}
+            </NavLink>
+          )}
 
           {/* Hamburger, only on small screens */}
           <button

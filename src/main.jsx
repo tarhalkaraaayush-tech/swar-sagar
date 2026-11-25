@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import { LanguageProvider } from './context/LanguageContext'
 import { SettingsProvider } from './context/SettingsContext'
+import { AuthProvider } from './context/AuthContext'
 import App from './App'
 import './index.css'
 
@@ -12,7 +13,9 @@ createRoot(document.getElementById('root')).render(
     <BrowserRouter>
       <LanguageProvider>
         <SettingsProvider>
-          <App />
+          <AuthProvider>
+            <App />
+          </AuthProvider>
         </SettingsProvider>
       </LanguageProvider>
     </BrowserRouter>

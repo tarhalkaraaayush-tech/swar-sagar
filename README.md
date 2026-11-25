@@ -18,6 +18,42 @@ Open the address it prints. Edits to files in `src/` show up in the browser inst
 
 `npm run build` makes a production version in `dist/`.
 
+## Connecting accounts and the database (Supabase)
+
+Ragas and taals work without this. Accounts, compositions and the classroom need a free Supabase project.
+
+1. Create a project at [supabase.com](https://supabase.com).
+2. **SQL Editor → New query**, paste all of `supabase/schema.sql`, click **Run**.
+   This creates the tables, the security rules and the private `submissions` bucket for recordings.
+3. **Project Settings → API**: copy the **Project URL** and the **anon / publishable** key.
+4. In this folder, copy `.env.example` to `.env.local` and paste those two values in.
+   (Never use the `service_role` / secret key in this app.)
+5. Restart `npm run dev`.
+
+**Make someone a moderator** (they can add, edit and delete compositions) — in the SQL Editor:
+
+```sql
+update public.profiles set role = 'moderator'
+where id = (select id from auth.users where email = 'their@email.com');
+```
+
+Optional: by default Supabase asks new users to confirm their email before they can sign in.
+To skip that while testing: **Authentication → Sign In / Providers → Email → turn off "Confirm email"**.
+
+### Who can do what
+
+| | Visitor | Member | Moderator | Class teacher | Class student |
+|---|---|---|---|---|---|
+| Read compositions | ✓ | ✓ | ✓ | | |
+| Add / edit / delete compositions | | | ✓ | | |
+| Create a class (becomes its teacher) | | ✓ | ✓ | | |
+| Join a class with its code | | ✓ | ✓ | | |
+| Add assignments, see roster, listen to recordings, give feedback | | | | ✓ | |
+| Record and submit for an assignment, see own feedback | | | | | ✓ |
+
+These rules are enforced by the database itself (Row Level Security in `schema.sql`), not just by hiding buttons.
+`supabase/tests/` contains the tests used to check them against a local Postgres.
+
 ## Swara notation
 
 | Written | Meaning |
@@ -32,9 +68,13 @@ Open the address it prints. Edits to files in `src/` show up in the browser inst
 
 ```
 src/
-  data/        raga (and later taal, composition) data
+  data/        ragas.js, taals.js (static reference data)
   i18n/        all UI text in Marathi, English, Hindi
-  context/     LanguageContext — current language, available everywhere
-  components/  Navbar, RagaCard, FilterBar, RagaModal, SwaraText
-  pages/       one file per page/route
+  context/     Language, Settings (notation), Auth (who is signed in)
+  lib/         supabase.js — the database connection
+  components/  Navbar, raga/taal pieces, AudioRecorder, CompositionForm, ui.jsx
+  pages/       one file per page; classroom/ holds the class + assignment pages
+supabase/
+  schema.sql   tables + security rules — run once in Supabase
+  tests/       SQL tests for the security rules
 ```
