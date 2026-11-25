@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+/*
+  @theme turns these variables into Tailwind classes automatically:
+  --color-gold → bg-gold, text-gold, border-gold ...
+  --font-display → font-display
+*/
+@theme {
+  --color-night: #0d0a14;      /* page background: concert hall at night */
+  --color-stage: #171225;      /* cards, panels */
+  --color-curtain: #241b38;    /* hover / raised surfaces */
+  --color-gold: #d4a94f;       /* accents */
+  --color-gold-soft: #e9cf8f;
+  --color-ivory: #efe7d6;      /* main text */
+  --color-mist: #a79fb8;       /* secondary text */
+
+  --font-display: "Playfair Display", "Noto Serif Devanagari", serif;
+  --font-body: "Nunito", "Noto Sans Devanagari", sans-serif;
+}
+
+body {
+  @apply bg-night text-ivory font-body antialiased;
+  /* a faint warm glow at the top, like stage lights */
+  background-image: radial-gradient(ellipse 80% 40% at 50% -10%, rgb(212 169 79 / 0.12), transparent);
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+/* ---------- Swara notation marks (used by <SwaraText />) ----------
+   Each swara gets "swara", a system class (bk | pal) and its marks
+   (komal / tivra / mandra / taar). ::before draws marks ABOVE the
+   letter, ::after draws marks BELOW, so two marks never collide. */
+.swara {
+  position: relative;
+  display: inline-block;
+  padding: 0.3em 0.05em;
+}
+.swara::before,
+.swara::after {
+  position: absolute; left: 50%;
+  background: currentColor;
+}
+
+/* Bhatkhande ------------------------------------------------------ */
+.bk.komal::after  {                 /* horizontal line below */
+  content: ""; bottom: 0.1em; transform: translateX(-50%);
+  width: 0.9em; height: 1.5px;
+}
+.bk.tivra::before {                 /* vertical line above */
+  content: ""; top: 0; transform: translateX(-50%);
+  width: 1.5px; height: 0.4em;
+}
+.bk.taar::before {                  /* dot above */
+  content: ""; top: 0; transform: translateX(-50%);
+  width: 4px; height: 4px; border-radius: 9999px;
+}
+.bk.mandra::after {                 /* dot below */
+  content: ""; bottom: 0; transform: translateX(-50%);
+  width: 4px; height: 4px; border-radius: 9999px;
+}
+
+/* Paluskar -------------------------------------------------------- */
+.pal.komal::after {                 /* halant (्) below: short stroke slanting down-left */
+  content: ""; bottom: 0; transform: translateX(-50%) rotate(35deg);
+  width: 1.5px; height: 0.45em;
+}
+.pal.tivra::after {                 /* inverted halant below: slants the other way */
+  content: ""; bottom: 0; transform: translateX(-50%) rotate(-35deg);
+  width: 1.5px; height: 0.45em;
+}
+.pal.mandra::before {               /* dot above */
+  content: ""; top: 0; transform: translateX(-50%);
+  width: 4px; height: 4px; border-radius: 9999px;
+}
+.pal.taar::before {                 /* vertical line above */
+  content: ""; top: -0.05em; transform: translateX(-50%);
+  width: 1.5px; height: 0.45em;
+}
