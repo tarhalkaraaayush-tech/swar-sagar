@@ -9,5 +9,6 @@ create table storage.objects (id uuid primary key default gen_random_uuid(), buc
 alter table storage.objects enable row level security;
 create function storage.foldername(name text) returns text[] language sql immutable as $$ select (string_to_array(name, '/'))[1:array_length(string_to_array(name,'/'),1)-1] $$;
 grant all on storage.objects to anon, authenticated;
--- Supabase grants table access to these roles by default; RLS does the real filtering
-alter default privileges in schema public grant all on tables to anon, authenticated;
+-- No default table grants: newer Supabase projects don't add them, so schema.sql must.
+revoke execute on all functions in schema public from public;
+alter default privileges in schema public revoke execute on functions from public;

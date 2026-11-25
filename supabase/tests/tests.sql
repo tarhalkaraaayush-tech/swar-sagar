@@ -40,7 +40,7 @@ select t_expect($$with d as (delete from compositions returning 1) select count(
 -- ===== anon reads compositions =====
 reset role; set role anon; set request.jwt.claim.sub = '';
 select t_expect($$select count(*) from compositions$$, 1, 'anonymous visitors can read compositions');
-select t_expect($$select count(*) from profiles$$, 0, 'anonymous visitors cannot read profiles');
+select t_expect_error($$select count(*) from profiles$$, 'anonymous visitors cannot read profiles');
 
 -- ===== teacher creates class + assignment =====
 reset role; set role authenticated; set request.jwt.claim.sub = '00000000-0000-0000-0000-00000000000a';

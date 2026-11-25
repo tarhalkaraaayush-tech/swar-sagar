@@ -11,7 +11,8 @@ const ROLE_KEY = { user: 'roleUser', moderator: 'roleModerator', admin: 'roleAdm
 // exists means the name box starts with the real name, not an empty string.
 export default function AccountPage() {
   const { t } = useLanguage()
-  const { profile } = useAuth()
+  const { profile, profileError } = useAuth()
+  if (profileError) return <Page><ErrorText>{profileError}</ErrorText></Page>
   if (!profile) return <Page><p className="text-mist">{t('loading')}</p></Page>
   return <AccountForm profile={profile} />
 }

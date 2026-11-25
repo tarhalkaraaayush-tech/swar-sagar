@@ -7,6 +7,7 @@ const AuthContext = createContext(null)
 export function AuthProvider({ children }) {
   const [session, setSession] = useState(null)
   const [profile, setProfile] = useState(null)
+  const [profileError, setProfileError] = useState('')
   const [loading, setLoading] = useState(Boolean(supabase)) // nothing to load if not configured
 
   const loadProfile = useCallback(async (userId) => {
@@ -14,8 +15,9 @@ export function AuthProvider({ children }) {
       setProfile(null)
       return
     }
-    const { data } = await supabase.from('profiles').select('*').eq('id', userId).single()
+    const { data, error } = await supabase.from('profiles').select('*').eq('id', userId).single()
     setProfile(data ?? null)
+    setProfileError(error ? error.message : '')
   }, [])
 
   useEffect(() => {
@@ -45,6 +47,7 @@ export function AuthProvider({ children }) {
     session,
     user: session?.user ?? null,
     profile,
+    profileError, // set if the profile couldn't be loaded (e.g. missing permissions)
     loading,
     isModerator: profile?.role === 'moderator' || profile?.role === 'admin',
 
