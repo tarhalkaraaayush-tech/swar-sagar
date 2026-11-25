@@ -28,8 +28,10 @@ function Compositions() {
 
   const load = useCallback(async () => {
     const { data, error } = await supabase.from('compositions').select('*').order('title')
-    if (error) setError(error.message)
-    else setItems(data)
+    if (error) {
+      setError(error.message)
+      setItems([]) // stop showing "Loading…" so the error is visible
+    } else setItems(data)
   }, [])
 
   useEffect(() => { load() }, [load])

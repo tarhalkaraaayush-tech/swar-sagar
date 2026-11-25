@@ -22,11 +22,14 @@ export function AuthProvider({ children }) {
     if (!supabase) return
 
     // 1) Is someone already signed in from a previous visit?
-    supabase.auth.getSession().then(async ({ data }) => {
-      setSession(data.session)
-      await loadProfile(data.session?.user.id)
-      setLoading(false)
-    })
+    // finally() makes sure "loading" ends even if something goes wrong.
+    supabase.auth.getSession()
+      .then(async ({ data }) => {
+        setSession(data.session)
+        await loadProfile(data.session?.user.id)
+      })
+      .catch((err) => console.error('Auth start-up failed:', err))
+      .finally(() => setLoading(false))
 
     // 2) Listen for sign-in / sign-out from now on.
     const { data: sub } = supabase.auth.onAuthStateChange((_event, newSession) => {

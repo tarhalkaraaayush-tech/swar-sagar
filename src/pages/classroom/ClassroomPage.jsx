@@ -24,7 +24,11 @@ export default function ClassroomPage() {
       // class_members → classes → profiles (the teacher), all in one request.
       supabase.from('class_members').select('classes(*, profiles(display_name))').eq('student_id', user.id),
     ])
-    if (mine.error || joined.error) return setError((mine.error ?? joined.error).message)
+    if (mine.error || joined.error) {
+      setTeaching([]) // stop showing "Loading…" so the error is visible
+      setEnrolled([])
+      return setError((mine.error ?? joined.error).message)
+    }
     setTeaching(mine.data)
     setEnrolled(joined.data.map((row) => row.classes))
   }, [user.id])
